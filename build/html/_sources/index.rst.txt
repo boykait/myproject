@@ -1,13 +1,8 @@
-﻿.. BookData documentation master file, created by
-   sphinx-quickstart on Sun Mar 27 09:02:01 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Python 和数据科学
+﻿个人文档首页
 ====================================
 .. note::
 
-    这里是 Scott 在学习数据科学所写的学习笔记，欢迎交流与指教。
+    这里是比较简洁，可以写点东西
 
 目录:
 ^^^^^
