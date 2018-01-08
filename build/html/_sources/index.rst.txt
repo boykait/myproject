@@ -1,20 +1,20 @@
-.. blog documentation master file, created by
-   sphinx-quickstart on Sun Jan  7 15:57:37 2018.
+﻿.. BookData documentation master file, created by
+   sphinx-quickstart on Sun Mar 27 09:02:01 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to blog's documentation!
-================================
+Python 和数据科学
+====================================
+.. note::
+
+    这里是 Scott 在学习数据科学所写的学习笔记，欢迎交流与指教。
+
+目录:
+^^^^^
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    :maxdepth: 2
+    :glob:
+    
+    it/index
+    life/index
