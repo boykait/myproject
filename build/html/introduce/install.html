@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>打造基于RTD+Sphinx+GitHub的个人博客空间 &mdash; blog 1.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="blog 1.0.1 documentation" href="../index.html"/>
+        <link rel="next" title="hello-IT" href="../it/index.html"/>
+        <link rel="prev" title="个人文档首页" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> blog
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">打造基于RTD+Sphinx+GitHub的个人博客空间</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">前提条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">步骤简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pythonsphinx">安装python和Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sphinx">建立Sphinx工程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#githubmaster">创建项目推送到GitHub远端master分支</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#readthedocs">导入到 ReadtheDocs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">资源附录</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../it/index.html">hello-IT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../life/index.html">hello-生活</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">blog</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>打造基于RTD+Sphinx+GitHub的个人博客空间</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduce/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rtd-sphinx-github">
+<h1>打造基于RTD+Sphinx+GitHub的个人博客空间<a class="headerlink" href="#rtd-sphinx-github" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">目的，之前国内的CSDN博客网站上写过一些篇不痛不痒的技术文章，后来没了兴致，主要是觉得该网站内容太多显得太繁杂且充斥着各种广告，想找一个比较简洁的地方记录点东西，经过一番度娘，找到了这个比较好的方案，记录一下，大家有需要也可以做参考。</p>
+</div>
+<div class="section" id="id1">
+<h2>前提条件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">git</span></code> 基本操作</li>
+<li><code class="docutils literal"><span class="pre">reStructuredText</span></code> 语法</li>
+<li>最重要的是要有一台电脑(一般配置即可)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h2>步骤简介<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>申请 <code class="docutils literal"><span class="pre">RTD</span></code> 和 <code class="docutils literal"><span class="pre">GitHub</span></code> 账号</li>
+<li>下载并安装 <code class="docutils literal"><span class="pre">Python3+</span></code> (推荐用3.5或3.6吧，自带pip安装数据源)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="pythonsphinx">
+<h2>安装python和Sphinx<a class="headerlink" href="#pythonsphinx" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">python</span></code> 软件比较好安装，除了要将其 <code class="docutils literal"><span class="pre">add</span> <span class="pre">to</span> <span class="pre">classpath</span></code> 外，其他一路默认即可，安装好后，使用 <code class="docutils literal"><span class="pre">cmd</span></code> 下执行 <code class="docutils literal"><span class="pre">python</span></code> 命令查看安装结果：</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Administrator</span><span class="o">&gt;</span><span class="n">python</span>
+<span class="n">Python</span> <span class="mf">3.5</span><span class="o">.</span><span class="mi">3</span> <span class="p">(</span><span class="n">v3</span><span class="o">.</span><span class="mf">5.3</span><span class="p">:</span><span class="mi">1880</span><span class="n">cb95a742</span><span class="p">,</span> <span class="n">Jan</span> <span class="mi">16</span> <span class="mi">2017</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="o">.</span><span class="mi">1900</span> <span class="mi">64</span> <span class="n">bit</span> <span class="p">(</span><span class="n">AM</span>
+<span class="n">D64</span><span class="p">)]</span> <span class="n">on</span> <span class="n">win32</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>安装好 <code class="docutils literal"><span class="pre">python</span></code> 后，进行 <code class="docutils literal"><span class="pre">Sphinx</span></code> 的安装，过程也很简单，执行命令 <code class="docutils literal"><span class="pre">easy_install</span> <span class="pre">-U</span> <span class="pre">Sphinx</span></code>，一般不出意外，十分钟左右安装成功。</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">==========================================================================</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">The</span> <span class="n">C</span> <span class="n">extension</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">compiled</span><span class="p">,</span> <span class="n">speedups</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">Failure</span> <span class="n">information</span><span class="p">,</span> <span class="k">if</span> <span class="nb">any</span><span class="p">,</span> <span class="ow">is</span> <span class="n">above</span><span class="o">.</span>
+<span class="n">Retrying</span> <span class="n">the</span> <span class="n">build</span> <span class="n">without</span> <span class="n">the</span> <span class="n">C</span> <span class="n">extension</span> <span class="n">now</span><span class="o">.</span>
+
+<span class="o">==========================================================================</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">The</span> <span class="n">C</span> <span class="n">extension</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">compiled</span><span class="p">,</span> <span class="n">speedups</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">enabled</span><span class="o">.</span>
+<span class="n">Plain</span><span class="o">-</span><span class="n">Python</span> <span class="n">installation</span> <span class="n">succeeded</span><span class="o">.</span>
+<span class="o">==========================================================================</span>
+<span class="n">creating</span> <span class="n">d</span><span class="p">:</span>\<span class="n">program</span> <span class="n">files</span>\<span class="n">python</span>\<span class="n">python35</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">markupsafe</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="n">py3</span><span class="o">.</span><span class="mi">5</span>
+<span class="o">.</span><span class="n">egg</span>
+<span class="n">Extracting</span> <span class="n">markupsafe</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="n">py3</span><span class="o">.</span><span class="mf">5.</span><span class="n">egg</span> <span class="n">to</span> <span class="n">d</span><span class="p">:</span>\<span class="n">program</span> <span class="n">files</span>\<span class="n">python</span>\<span class="n">python35</span>\<span class="n">lib</span>\<span class="n">site</span>
+<span class="o">-</span><span class="n">packages</span>
+<span class="n">Adding</span> <span class="n">markupsafe</span> <span class="mf">1.0</span> <span class="n">to</span> <span class="n">easy</span><span class="o">-</span><span class="n">install</span><span class="o">.</span><span class="n">pth</span> <span class="n">file</span>
+
+<span class="n">Installed</span> <span class="n">d</span><span class="p">:</span>\<span class="n">program</span> <span class="n">files</span>\<span class="n">python</span>\<span class="n">python35</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">markupsafe</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="n">py3</span><span class="o">.</span>
+<span class="mf">5.</span><span class="n">egg</span>
+<span class="n">Finished</span> <span class="n">processing</span> <span class="n">dependencies</span> <span class="k">for</span> <span class="n">Sphinx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sphinx">
+<h2>建立Sphinx工程<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>使用 <code class="docutils literal"><span class="pre">sphinx</span></code> 自带的配置工具 <code class="docutils literal"><span class="pre">sphinx-quickstart</span></code> ，我提前创建的目录 <code class="docutils literal"><span class="pre">D:\mygithub\blog</span></code> ,具体详细配置大家随意，满足自己需求即可:</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span>D:\mygithub&gt;
+D:\mygithub&gt;sphinx-quickstart
+Welcome to the Sphinx 1.6.5 quickstart utility.
+
+Please enter values for the following settings (just press Enter to
+accept a default value, if one is given in brackets).
+
+Enter the root path for documentation.
+&gt; Root path for the documentation [.]:
+
+You have two options for placing the build directory for Sphinx output.
+Either, you use a directory &quot;_build&quot; within the root path, or you separate
+&quot;source&quot; and &quot;build&quot; directories within the root path.
+&gt; Separate source and build directories (y/n) [n]: y
+
+Inside the root directory, two more directories will be created; &quot;_templates&quot;
+for custom HTML templates and &quot;_static&quot; for custom stylesheets and other static
+files. You can enter another prefix (such as &quot;.&quot;) to replace the underscore.
+&gt; Name prefix for templates and static dir [_]:
+
+The project name will occur in several places in the built documentation.
+&gt; Project name: blog
+&gt; Author name(s): boyka
+
+Sphinx has the notion of a &quot;version&quot; and a &quot;release&quot; for the
+software. Each version can have multiple releases. For example, for
+Python the version is something like 2.5 or 3.0, while the release is
+something like 2.5.1 or 3.0a1.  If you don&#39;t need this dual structure,
+just set both to the same value.
+&gt; Project version []: 1.0.1
+&gt; Project release [1.0.1]:
+
+If the documents are to be written in a language other than English,
+you can select a language here by its language code. Sphinx will then
+translate text that it generates into that language.
+
+For a list of supported codes, see
+http://sphinx-doc.org/config.html#confval-language.
+&gt; Project language [en]:
+
+The file name suffix for source files. Commonly, this is either &quot;.txt&quot;
+or &quot;.rst&quot;.  Only files with this suffix are considered documents.
+&gt; Source file suffix [.rst]:
+
+One document is special in that it is considered the top node of the
+&quot;contents tree&quot;, that is, it is the root of the hierarchical structure
+of the documents. Normally, this is &quot;index&quot;, but if your &quot;index&quot;
+document is a custom template, you can also set this to another filename.
+&gt; Name of your master document (without suffix) [index]:
+
+Sphinx can also add configuration for epub output:
+&gt; Do you want to use the epub builder (y/n) [n]: y
+
+Please indicate if you want to use one of the following Sphinx extensions:
+&gt; autodoc: automatically insert docstrings from modules (y/n) [n]: y
+&gt; doctest: automatically test code snippets in doctest blocks (y/n) [n]:
+&gt; intersphinx: link between Sphinx documentation of different projects (y/n) [n]
+:
+&gt; todo: write &quot;todo&quot; entries that can be shown or hidden on build (y/n) [n]:
+&gt; coverage: checks for documentation coverage (y/n) [n]:
+&gt; imgmath: include math, rendered as PNG or SVG images (y/n) [n]: y
+&gt; mathjax: include math, rendered in the browser by MathJax (y/n) [n]: y
+Note: imgmath and mathjax cannot be enabled at the same time.
+imgmath has been deselected.
+&gt; ifconfig: conditional inclusion of content based on config values (y/n) [n]:
+&gt; viewcode: include links to the source code of documented Python objects (y/n)
+[n]: y
+&gt; githubpages: create .nojekyll file to publish the document on GitHub pages (y/
+n) [n]: y
+
+A Makefile and a Windows command file can be generated for you so that you
+only have to run e.g. `make html&#39; instead of invoking sphinx-build
+directly.
+&gt; Create Makefile? (y/n) [y]: y
+&gt; Create Windows command file? (y/n) [y]: y
+
+Creating file .\source\conf.py.
+Creating file .\source\index.rst.
+Creating file .\Makefile.
+Creating file .\make.bat.
+
+Finished: An initial directory structure has been created.
+
+You should now populate your master file .\source\index.rst and create other doc
+umentation
+source files. Use the Makefile to build the docs, like so:
+   make builder
+where &quot;builder&quot; is one of the supported builders, e.g. html, latex or linkcheck.
+</pre></div>
+</div>
+<ul class="simple">
+<li>执行完毕后，会得到如下的几个文件：</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span>build      运行make命令后，生成的文件都在这个目录里面
+source     放置文档的源文件
+make.bat   批处理命令
+makefile
+</pre></div>
+</div>
+<ul class="simple">
+<li>执行一把 <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> ，生成静态站点项目,可以通过浏览器(用chrome或Firefox,开发人员必备)瞅瞅，是有点不太入眼，后期再更改它的风格：</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">:</span>\<span class="n">mygithub</span>\<span class="n">blog</span><span class="o">&gt;</span><span class="n">make</span> <span class="n">html</span>
+<span class="n">Running</span> <span class="n">Sphinx</span> <span class="n">v1</span><span class="o">.</span><span class="mf">6.5</span>
+<span class="n">making</span> <span class="n">output</span> <span class="n">directory</span><span class="o">...</span>
+<span class="n">loading</span> <span class="n">pickled</span> <span class="n">environment</span><span class="o">...</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">created</span>
+<span class="n">building</span> <span class="p">[</span><span class="n">mo</span><span class="p">]:</span> <span class="n">targets</span> <span class="k">for</span> <span class="mi">0</span> <span class="n">po</span> <span class="n">files</span> <span class="n">that</span> <span class="n">are</span> <span class="n">out</span> <span class="n">of</span> <span class="n">date</span>
+<span class="n">building</span> <span class="p">[</span><span class="n">html</span><span class="p">]:</span> <span class="n">targets</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">source</span> <span class="n">files</span> <span class="n">that</span> <span class="n">are</span> <span class="n">out</span> <span class="n">of</span> <span class="n">date</span>
+<span class="n">updating</span> <span class="n">environment</span><span class="p">:</span> <span class="mi">1</span> <span class="n">added</span><span class="p">,</span> <span class="mi">0</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">removed</span>
+<span class="n">reading</span> <span class="n">sources</span><span class="o">...</span> <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span> <span class="n">index</span>
+<span class="n">looking</span> <span class="k">for</span> <span class="n">now</span><span class="o">-</span><span class="n">outdated</span> <span class="n">files</span><span class="o">...</span> <span class="n">none</span> <span class="n">found</span>
+<span class="n">pickling</span> <span class="n">environment</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">checking</span> <span class="n">consistency</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">preparing</span> <span class="n">documents</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">writing</span> <span class="n">output</span><span class="o">...</span> <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span> <span class="n">index</span>
+<span class="n">generating</span> <span class="n">indices</span><span class="o">...</span> <span class="n">genindex</span>
+<span class="n">writing</span> <span class="n">additional</span> <span class="n">pages</span><span class="o">...</span> <span class="n">search</span>
+<span class="n">copying</span> <span class="n">static</span> <span class="n">files</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">copying</span> <span class="n">extra</span> <span class="n">files</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">dumping</span> <span class="n">search</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">English</span> <span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="n">en</span><span class="p">)</span> <span class="o">...</span> <span class="n">done</span>
+<span class="n">dumping</span> <span class="nb">object</span> <span class="n">inventory</span><span class="o">...</span> <span class="n">done</span>
+<span class="n">build</span> <span class="n">succeeded</span><span class="o">.</span>
+
+<span class="n">Build</span> <span class="n">finished</span><span class="o">.</span> <span class="n">The</span> <span class="n">HTML</span> <span class="n">pages</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">build</span>\<span class="n">html</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="githubmaster">
+<h2>创建项目推送到GitHub远端master分支<a class="headerlink" href="#githubmaster" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>关于 <code class="docutils literal"><span class="pre">GitHub</span></code> 和 <code class="docutils literal"><span class="pre">ReadTheDocs</span></code> 的注册不用多说吧，就和注册淘宝账号一样简单。</li>
+<li>建一个 <code class="docutils literal"><span class="pre">GitHub</span></code> 库: <a class="reference external" href="https://github.com/gxw255613/myproject.git">https://github.com/gxw255613/myproject.git</a></li>
+<li>下载 <a class="reference external" href="https://git-scm.com/download/win">git工具</a> 并安装。</li>
+<li>打开blog项目目录第一层路径，空白处右键鼠标&gt; <code class="docutils literal"><span class="pre">git</span> <span class="pre">bush</span> <span class="pre">here</span></code> ,开始执行一系类git操作(ps: 我也终于有了至高无上的master权限了,happy ^^)。</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span>- $ git init
+- $ git add .
+- $ git commit -m &#39;blog start&#39;
+- $ git remote add origin https://github.com/gxw255613/myproject.git
+- $ git push origin master
+</pre></div>
+</div>
+</div>
+<div class="section" id="readthedocs">
+<h2>导入到 ReadtheDocs<a class="headerlink" href="#readthedocs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>启用 <code class="docutils literal"><span class="pre">GitHub</span></code> 的代码更新通知服务，选择对应的仓库，然后依次点击 <code class="docutils literal"><span class="pre">Setting</span> <span class="pre">=&gt;</span> <span class="pre">Integrations</span> <span class="pre">&amp;</span> <span class="pre">Service</span> <span class="pre">=&gt;</span> <span class="pre">Add</span> <span class="pre">service</span> <span class="pre">=&gt;</span> <span class="pre">ReadTheDocs</span></code> ；</li>
+<li>到 <code class="docutils literal"><span class="pre">ReadtheDocs</span> <span class="pre">import</span></code> 这个仓库，导入成功后，点击阅读文档，便可看到 Web 效果了。</li>
+<li>如果在更新主题的时候遇到这个问题,就按照提示执行 <code class="docutils literal"><span class="pre">ip</span> <span class="pre">install</span> <span class="pre">sphinx\_rtd\_theme</span></code> 吧：</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">:</span>\<span class="n">mygithub</span>\<span class="n">blog</span><span class="o">&gt;</span><span class="n">make</span> <span class="n">html</span>
+<span class="n">Running</span> <span class="n">Sphinx</span> <span class="n">v1</span><span class="o">.</span><span class="mf">6.5</span>
+<span class="n">loading</span> <span class="n">pickled</span> <span class="n">environment</span><span class="o">...</span> <span class="n">done</span>
+
+<span class="n">Theme</span> <span class="n">error</span><span class="p">:</span>
+<span class="n">sphinx_rtd_theme</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">a</span> <span class="n">hard</span> <span class="n">dependency</span> <span class="n">since</span> <span class="n">version</span> <span class="mf">1.4</span><span class="o">.</span><span class="mf">0.</span> <span class="n">Please</span> <span class="n">inst</span>
+<span class="nb">all</span> <span class="n">it</span> <span class="n">manually</span><span class="o">.</span><span class="p">(</span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx_rtd_theme</span><span class="p">)</span>
+
+<span class="n">D</span><span class="p">:</span>\<span class="n">mygithub</span>\<span class="n">blog</span><span class="o">&gt;</span><span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx_rtd_theme</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">以后写点东西的步骤应该变成了:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">写reStructuredText语法的文章</span>
+<span class="o">-</span> <span class="n">copy文档到本地blog</span><span class="o">&gt;</span><span class="n">source对应的目录下</span>
+<span class="o">-</span> <span class="n">更新index</span><span class="o">.</span><span class="n">rst</span>
+<span class="o">-</span> <span class="n">执行make</span> <span class="n">html</span>
+<span class="o">-</span> <span class="n">执行git</span> <span class="n">add</span>\<span class="n">commit</span>\<span class="n">push</span>\<span class="p">(</span><span class="n">merge</span><span class="p">)</span><span class="n">操作</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">好像有点复杂，管它呢，后期到时候看能不能再搞一个自动化的东西来一键执行。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>资源附录<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://zh-sphinx-doc.readthedocs.io/en/latest/tutorial.html#id3">sphinx中文介绍</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../it/index.html" class="btn btn-neutral float-right" title="hello-IT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="个人文档首页" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, boyka.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

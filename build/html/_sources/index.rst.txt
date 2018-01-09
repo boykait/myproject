@@ -11,5 +11,6 @@
     :maxdepth: 2
     :glob:
     
+    introduce/install
     it/index
     life/index
