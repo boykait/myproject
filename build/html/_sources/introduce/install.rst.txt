@@ -1,5 +1,9 @@
-﻿打造基于RTD+Sphinx+GitHub的个人博客空间
+﻿begining
 =======================================
+
+打造基于RTD+Sphinx+GitHub的个人博客空间
+---------------------------------------
+
 .. note::
 
 	目的，之前国内的CSDN博客网站上写过一些篇不痛不痒的技术文章，后来没了兴致，主要是觉得该网站内容太多显得太繁杂且充斥着各种广告，想找一个比较简洁的地方记录点东西，经过一番度娘，找到了这个比较好的方案，记录一下，大家有需要也可以做参考。
@@ -7,20 +11,20 @@
 前提条件
 --------
 
- - ``git`` 基本操作
+ - git基本操作
  - ``reStructuredText`` 语法
  - 最重要的是要有一台电脑(一般配置即可)
  
 步骤简介
 --------
 
- - 申请 ``RTD`` 和 ``GitHub`` 账号
- - 下载并安装 ``Python3+`` (推荐用3.5或3.6吧，自带pip安装数据源)
+ - 申请RTD和GitHub账号
+ - 下载并安装Python3+(推荐用3.5或3.6吧，自带pip安装数据源)
 
 安装python和Sphinx
 ------------------
 
-- ``python`` 软件比较好安装，除了要将其 ``add to classpath`` 外，其他一路默认即可，安装好后，使用 ``cmd`` 下执行 ``python`` 命令查看安装结果：
+- python软件比较好安装，除了要将其add to classpath外，其他一路默认即可，安装好后，使用cmd下执行python命令查看安装结果：
 
 ::
 
@@ -29,7 +33,7 @@
 	D64)] on win32
 	Type "help", "copyright", "credits" or "license" for more information.
 
-- 安装好 ``python`` 后，进行 ``Sphinx`` 的安装，过程也很简单，执行命令 ``easy_install -U Sphinx``，一般不出意外，十分钟左右安装成功。
+- 安装好python后，进行Sphinx的安装，过程也很简单，执行命令“easy_install -U Sphinx”，一般不出意外，十分钟左右安装成功。
 
 ::
 
@@ -55,7 +59,7 @@
 建立Sphinx工程
 --------------
 
-- 使用 ``sphinx`` 自带的配置工具 ``sphinx-quickstart`` ，我提前创建的目录 ``D:\mygithub\blog`` ,具体详细配置大家随意，满足自己需求即可:
+- 使用sphinx自带的配置工具sphinx-quickstart，我提前创建的目录 D:\mygithub\blog,具体详细配置大家随意，满足自己需求即可:
 
 ::
 
@@ -159,7 +163,7 @@
 	makefile
 
 
-- 执行一把 ``make html`` ，生成静态站点项目,可以通过浏览器(用chrome或Firefox,开发人员必备)瞅瞅，是有点不太入眼，后期再更改它的风格：
+- 执行一把 make html，生成静态站点项目,可以通过浏览器(用chrome或Firefox,开发人员必备)瞅瞅，是有点不太入眼，后期再更改它的风格：
 
 ::
 
@@ -190,10 +194,10 @@
 创建项目推送到GitHub远端master分支
 ----------------------------------
 
-- 关于 ``GitHub`` 和 ``ReadTheDocs`` 的注册不用多说吧，就和注册淘宝账号一样简单。
-- 建一个 ``GitHub`` 库: https://github.com/gxw255613/myproject.git
+- 关于GitHub和ReadTheDocs的注册不用多说吧，就和注册淘宝账号一样简单。
+- 建一个GitHub库: https://github.com/gxw255613/myproject.git
 - 下载 `git工具 <https://git-scm.com/download/win>`_ 并安装。
-- 打开blog项目目录第一层路径，空白处右键鼠标> ``git bush here`` ,开始执行一系类git操作(ps: 我也终于有了至高无上的master权限了,happy ^^)。
+- 打开blog项目目录第一层路径，空白处右键鼠标>git bush here,开始执行一系类git操作(ps: 我也终于有了至高无上的master权限了,happy ^^)。
 
 ::
 
@@ -207,10 +211,10 @@
 导入到 ReadtheDocs
 ------------------
 
-- 启用 ``GitHub`` 的代码更新通知服务，选择对应的仓库，然后依次点击 ``Setting => Integrations & Service => Add service => ReadTheDocs`` ；
-- 到 ``ReadtheDocs import`` 这个仓库，导入成功后，点击阅读文档，便可看到 Web 效果了。
+- 启用GitHub的代码更新通知服务，选择对应的仓库，然后依次点击 Setting => Integrations & Service => Add service => ReadTheDocs
+- 到 ReadtheDocs import 这个仓库，导入成功后，点击阅读文档，便可看到 Web 效果了
 
-- 如果在更新主题的时候遇到这个问题,就按照提示执行 ``ip install sphinx\_rtd\_theme`` 吧：
+- 如果在更新主题的时候遇到这个问题,就按照提示执行"ip install sphinx\_rtd\_theme"吧：
 
 ::
 
@@ -240,3 +244,7 @@
 --------
 
 - `sphinx中文介绍 <http://zh-sphinx-doc.readthedocs.io/en/latest/tutorial.html#id3>`_ 
+
+.. warning::
+
+    试一试吧，超级好使，轻轻写美文

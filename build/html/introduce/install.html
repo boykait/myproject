@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>打造基于RTD+Sphinx+GitHub的个人博客空间 &mdash; blog 1.0.1 documentation</title>
+  <title>begining &mdash; blog 1.0.1 documentation</title>
   
 
   
@@ -91,7 +91,8 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">打造基于RTD+Sphinx+GitHub的个人博客空间</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">begining</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rtd-sphinx-github">打造基于RTD+Sphinx+GitHub的个人博客空间</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">前提条件</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">步骤简介</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pythonsphinx">安装python和Sphinx</a></li>
@@ -147,7 +148,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>打造基于RTD+Sphinx+GitHub的个人博客空间</li>
+      <li>begining</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,17 +167,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="rtd-sphinx-github">
-<h1>打造基于RTD+Sphinx+GitHub的个人博客空间<a class="headerlink" href="#rtd-sphinx-github" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="begining">
+<h1>begining<a class="headerlink" href="#begining" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rtd-sphinx-github">
+<h2>打造基于RTD+Sphinx+GitHub的个人博客空间<a class="headerlink" href="#rtd-sphinx-github" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">目的，之前国内的CSDN博客网站上写过一些篇不痛不痒的技术文章，后来没了兴致，主要是觉得该网站内容太多显得太繁杂且充斥着各种广告，想找一个比较简洁的地方记录点东西，经过一番度娘，找到了这个比较好的方案，记录一下，大家有需要也可以做参考。</p>
+</div>
 </div>
 <div class="section" id="id1">
 <h2>前提条件<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal"><span class="pre">git</span></code> 基本操作</li>
+<li>git基本操作</li>
 <li><code class="docutils literal"><span class="pre">reStructuredText</span></code> 语法</li>
 <li>最重要的是要有一台电脑(一般配置即可)</li>
 </ul>
@@ -186,15 +190,15 @@
 <h2>步骤简介<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li>申请 <code class="docutils literal"><span class="pre">RTD</span></code> 和 <code class="docutils literal"><span class="pre">GitHub</span></code> 账号</li>
-<li>下载并安装 <code class="docutils literal"><span class="pre">Python3+</span></code> (推荐用3.5或3.6吧，自带pip安装数据源)</li>
+<li>申请RTD和GitHub账号</li>
+<li>下载并安装Python3+(推荐用3.5或3.6吧，自带pip安装数据源)</li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="pythonsphinx">
 <h2>安装python和Sphinx<a class="headerlink" href="#pythonsphinx" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">python</span></code> 软件比较好安装，除了要将其 <code class="docutils literal"><span class="pre">add</span> <span class="pre">to</span> <span class="pre">classpath</span></code> 外，其他一路默认即可，安装好后，使用 <code class="docutils literal"><span class="pre">cmd</span></code> 下执行 <code class="docutils literal"><span class="pre">python</span></code> 命令查看安装结果：</li>
+<li>python软件比较好安装，除了要将其add to classpath外，其他一路默认即可，安装好后，使用cmd下执行python命令查看安装结果：</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">Administrator</span><span class="o">&gt;</span><span class="n">python</span>
 <span class="n">Python</span> <span class="mf">3.5</span><span class="o">.</span><span class="mi">3</span> <span class="p">(</span><span class="n">v3</span><span class="o">.</span><span class="mf">5.3</span><span class="p">:</span><span class="mi">1880</span><span class="n">cb95a742</span><span class="p">,</span> <span class="n">Jan</span> <span class="mi">16</span> <span class="mi">2017</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="o">.</span><span class="mi">1900</span> <span class="mi">64</span> <span class="n">bit</span> <span class="p">(</span><span class="n">AM</span>
@@ -203,7 +207,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li>安装好 <code class="docutils literal"><span class="pre">python</span></code> 后，进行 <code class="docutils literal"><span class="pre">Sphinx</span></code> 的安装，过程也很简单，执行命令 <code class="docutils literal"><span class="pre">easy_install</span> <span class="pre">-U</span> <span class="pre">Sphinx</span></code>，一般不出意外，十分钟左右安装成功。</li>
+<li>安装好python后，进行Sphinx的安装，过程也很简单，执行命令“easy_install -U Sphinx”，一般不出意外，十分钟左右安装成功。</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">==========================================================================</span>
 <span class="n">WARNING</span><span class="p">:</span> <span class="n">The</span> <span class="n">C</span> <span class="n">extension</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">compiled</span><span class="p">,</span> <span class="n">speedups</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">enabled</span><span class="o">.</span>
@@ -229,7 +233,7 @@
 <div class="section" id="sphinx">
 <h2>建立Sphinx工程<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>使用 <code class="docutils literal"><span class="pre">sphinx</span></code> 自带的配置工具 <code class="docutils literal"><span class="pre">sphinx-quickstart</span></code> ，我提前创建的目录 <code class="docutils literal"><span class="pre">D:\mygithub\blog</span></code> ,具体详细配置大家随意，满足自己需求即可:</li>
+<li>使用sphinx自带的配置工具sphinx-quickstart，我提前创建的目录 D:mygithubblog,具体详细配置大家随意，满足自己需求即可:</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span>D:\mygithub&gt;
 D:\mygithub&gt;sphinx-quickstart
@@ -331,7 +335,7 @@ makefile
 </pre></div>
 </div>
 <ul class="simple">
-<li>执行一把 <code class="docutils literal"><span class="pre">make</span> <span class="pre">html</span></code> ，生成静态站点项目,可以通过浏览器(用chrome或Firefox,开发人员必备)瞅瞅，是有点不太入眼，后期再更改它的风格：</li>
+<li>执行一把 make html，生成静态站点项目,可以通过浏览器(用chrome或Firefox,开发人员必备)瞅瞅，是有点不太入眼，后期再更改它的风格：</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">:</span>\<span class="n">mygithub</span>\<span class="n">blog</span><span class="o">&gt;</span><span class="n">make</span> <span class="n">html</span>
 <span class="n">Running</span> <span class="n">Sphinx</span> <span class="n">v1</span><span class="o">.</span><span class="mf">6.5</span>
@@ -361,10 +365,10 @@ makefile
 <div class="section" id="githubmaster">
 <h2>创建项目推送到GitHub远端master分支<a class="headerlink" href="#githubmaster" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>关于 <code class="docutils literal"><span class="pre">GitHub</span></code> 和 <code class="docutils literal"><span class="pre">ReadTheDocs</span></code> 的注册不用多说吧，就和注册淘宝账号一样简单。</li>
-<li>建一个 <code class="docutils literal"><span class="pre">GitHub</span></code> 库: <a class="reference external" href="https://github.com/gxw255613/myproject.git">https://github.com/gxw255613/myproject.git</a></li>
+<li>关于GitHub和ReadTheDocs的注册不用多说吧，就和注册淘宝账号一样简单。</li>
+<li>建一个GitHub库: <a class="reference external" href="https://github.com/gxw255613/myproject.git">https://github.com/gxw255613/myproject.git</a></li>
 <li>下载 <a class="reference external" href="https://git-scm.com/download/win">git工具</a> 并安装。</li>
-<li>打开blog项目目录第一层路径，空白处右键鼠标&gt; <code class="docutils literal"><span class="pre">git</span> <span class="pre">bush</span> <span class="pre">here</span></code> ,开始执行一系类git操作(ps: 我也终于有了至高无上的master权限了,happy ^^)。</li>
+<li>打开blog项目目录第一层路径，空白处右键鼠标&gt;git bush here,开始执行一系类git操作(ps: 我也终于有了至高无上的master权限了,happy ^^)。</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span>- $ git init
 - $ git add .
@@ -377,9 +381,9 @@ makefile
 <div class="section" id="readthedocs">
 <h2>导入到 ReadtheDocs<a class="headerlink" href="#readthedocs" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>启用 <code class="docutils literal"><span class="pre">GitHub</span></code> 的代码更新通知服务，选择对应的仓库，然后依次点击 <code class="docutils literal"><span class="pre">Setting</span> <span class="pre">=&gt;</span> <span class="pre">Integrations</span> <span class="pre">&amp;</span> <span class="pre">Service</span> <span class="pre">=&gt;</span> <span class="pre">Add</span> <span class="pre">service</span> <span class="pre">=&gt;</span> <span class="pre">ReadTheDocs</span></code> ；</li>
-<li>到 <code class="docutils literal"><span class="pre">ReadtheDocs</span> <span class="pre">import</span></code> 这个仓库，导入成功后，点击阅读文档，便可看到 Web 效果了。</li>
-<li>如果在更新主题的时候遇到这个问题,就按照提示执行 <code class="docutils literal"><span class="pre">ip</span> <span class="pre">install</span> <span class="pre">sphinx\_rtd\_theme</span></code> 吧：</li>
+<li>启用GitHub的代码更新通知服务，选择对应的仓库，然后依次点击 Setting =&gt; Integrations &amp; Service =&gt; Add service =&gt; ReadTheDocs</li>
+<li>到 ReadtheDocs import 这个仓库，导入成功后，点击阅读文档，便可看到 Web 效果了</li>
+<li>如果在更新主题的时候遇到这个问题,就按照提示执行”ip install sphinx_rtd_theme”吧：</li>
 </ul>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">D</span><span class="p">:</span>\<span class="n">mygithub</span>\<span class="n">blog</span><span class="o">&gt;</span><span class="n">make</span> <span class="n">html</span>
 <span class="n">Running</span> <span class="n">Sphinx</span> <span class="n">v1</span><span class="o">.</span><span class="mf">6.5</span>
@@ -411,6 +415,10 @@ makefile
 <ul class="simple">
 <li><a class="reference external" href="http://zh-sphinx-doc.readthedocs.io/en/latest/tutorial.html#id3">sphinx中文介绍</a></li>
 </ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">试一试吧，超级好使，轻轻写美文</p>
+</div>
 </div>
 </div>
 
