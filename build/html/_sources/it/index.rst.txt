@@ -7,4 +7,5 @@
     :maxdepth: 2   
 
     java/index
+    python/index
 
