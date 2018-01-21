@@ -8,4 +8,5 @@
 
     java/index
     python/index
+    postman/index
 
