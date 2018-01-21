@@ -1,6 +1,6 @@
 ﻿都江堰一日游
 ==============================
 
--  图片
+-  图片链接
 
-.. image:: https://pan.baidu.com/s/1dGV7GmH
+`都江堰一日游图库 <https://pan.baidu.com/s/1ggl289t>`__
