@@ -4,6 +4,6 @@ python
 python;\
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     base/base1

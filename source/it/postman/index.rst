@@ -4,6 +4,6 @@ postman
 postman;\
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     install&learning/install&learning

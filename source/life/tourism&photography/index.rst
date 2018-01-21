@@ -4,7 +4,7 @@
 我的世界里，也有说走就走的冲动。\
 
 .. toctree::
-    :maxdepth: 2   
+    :maxdepth: 1   
 
     20180101shuijingfang/shuijingfang
     20171126dujiangyan/dujiangyan

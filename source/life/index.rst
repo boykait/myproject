@@ -4,7 +4,7 @@
 我的世界里，也可以有多种色彩。\
 
 .. toctree::
-    :maxdepth: 2   
+    :maxdepth: 1   
 
     tourism&photography/index
 
