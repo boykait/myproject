@@ -1,4 +1,4 @@
-java8系列之lambda-1
+lambda初识
 ====================
 .. note ::
 
@@ -14,7 +14,7 @@ java8系列之lambda-1
 
 - 函数作为实参进行传递在c/c++中非常常见(表现为指针形式)，在java中则需要利用匿名内部类，先看一组简单的线程实现代码对比：
 
-.. code:: java
+.. code-block:: java
 
 	 new Thread(new Runnable() {
 		@Override
@@ -27,7 +27,8 @@ java8系列之lambda-1
 
 - 输出结果:
 
-.. code:: java
+.. code-block:: java
+
 
 	匿名内部类式创建线程!
 	lambda式创建线程 !
@@ -45,7 +46,7 @@ lambda和函数式接口
    
 - 比如：
 
-.. code:: java
+.. code-block:: java
 
 	//Callable
 	//旧api      
@@ -69,13 +70,12 @@ lambda和函数式接口
 	//java8 
 	Comparator<String> c2 = (s1, s2) -> s1.compareToIgnoreCase(s2);
 
-
 lambda在集合中的一些应用
 ------------------------
 
 - 再看一道例子：
 
-.. code :: java
+.. code-block:: java
 
 	// code:
 	List<Integer> list = Arrays.asList(1, 4, 5, 6, 2, 3);
@@ -96,19 +96,19 @@ lambda在集合中的一些应用
    - 不能充分利用CPU多核优势；
    - 不利于编译器的优化工作。
    
-- 在java8中，将外部迭代转换为内部迭代,同样能够输入相同的结果：
+- 在java8中，将外部迭代转换为内部迭代,同样能够输入相同的结果:
 
-.. code :: java
+.. code-block:: java
 
     //可以写成：
 	list.forEach(i -> System.out::println(i));
 	//甚至可以写成 
-	list.forEach(System.out::println)；
+	list.forEach(System.out::println);
 	
 - 此外，java8中对集合的操作进行了进一步的丰富，在Collection集合类中添加了stream方法，这两个方法会将Collection的实例转换为数据流(关于流将会在后面进一步展开学习)，将lambda和stream结合起来使用，在进行数据的流水线化处理时优势极为明显。
 - 又来例子：获取列表中前50个大于20的数据的列表：
 
-.. code :: java
+.. code-block:: java
 
 	//旧方法
 	List<Integer> resList1 = new ArrayList<>();
@@ -122,10 +122,25 @@ lambda在集合中的一些应用
 	   }
 	}
 	//lambda
-	List<Integer> resList2 = list.stream()
-							 .filter(i -> i > 20)
-							 .limit(50)
-							 .collect(Collectors.toList());
+	List<Integer> resList2 = list.stream().filter(i -> i > 20).limit(50).collect(Collectors.toList());
+		//旧方法
+	List<Integer> resList1 = new ArrayList<>();
+	int num = 0;
+	for(Integer i: list) {
+	   if(num > 50) {
+		   break;
+	   } else if(i > 20) {
+		   resList1.add(i);
+		   num++;
+	   }
+	}
+	//lambda
+	List<Integer> resList2 = list.stream().filter(i -> i > 20).limit(50).collect(Collectors.toList());
 	
 - 将列表转换为流能够更好地利用多核的优势，直接将stream用parallelStream替代即可。
 - stream中的还有很多的方法比如map、reduce、distinct、skep、findAny等很多方法，可以将这些方法进行流水线式拼接组合以满足自身的业务逻辑需求，在这不写太多例子了，自己动手实践吧。
+
+
+
+
+
