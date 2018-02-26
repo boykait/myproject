@@ -7,3 +7,4 @@
     :maxdepth: 1
 
     base/index
+    lambda/index
