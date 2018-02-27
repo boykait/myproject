@@ -8,6 +8,7 @@
 
     base/index
     lambda/index
+    lambda/lambda-1
     
 标题
 ------
