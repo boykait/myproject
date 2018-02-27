@@ -8,8 +8,6 @@
 ^^^^^
 
 .. toctree::
-    :maxdepth: 8
-    :glob:
     
     introduce/install
     it/index
