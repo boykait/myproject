@@ -8,7 +8,7 @@
 ^^^^^
 
 .. toctree::
-    :maxdepth: 5
+    :maxdepth: 8
     :glob:
     
     introduce/install
