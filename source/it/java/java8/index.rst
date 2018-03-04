@@ -8,3 +8,5 @@
 
     base/index
     lambda/index
+    lambda/lambda-1
+ 
