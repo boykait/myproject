@@ -1,10 +1,9 @@
-﻿java8-lambda
+python
 ============================
 
+python;\
 
 .. toctree::
     :maxdepth: 1
 
-    lambda-1
-    lambda原理篇(译)
-
+    base/base1
