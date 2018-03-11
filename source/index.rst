@@ -5,15 +5,15 @@
 
    "沉迷"学习，无法自拔
 
-博主简介
+**博主简介:**
     
-:【name   】: boyka
+ ``【name   】``  boyka
 
-:【job    】: 初级程序员
+ ``【job    】``  初级程序员
 
-:【address】: 四川成都
+ ``【address】``  四川成都
 
-:【wechat 】: gxw255613
+ ``【email  】``  gxw255613@126.com
 
 目录:
 ^^^^^
