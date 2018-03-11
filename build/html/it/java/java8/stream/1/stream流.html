@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>stream流原理浅析 &mdash; blog 1.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../../search.html"/>
+    <link rel="top" title="blog 1.0.1 documentation" href="../../../../../index.html"/>
+        <link rel="up" title="stream流" href="../index.html"/>
+        <link rel="next" title="python" href="../../../../python/index.html"/>
+        <link rel="prev" title="stream流" href="../index.html"/> 
+
+  
+  <script src="../../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> blog
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../introduce/install.html">begining</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">hello-IT</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">java</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">java8</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../lambda/index.html">lambda表达式</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">stream流</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/index.html">python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../postman/index.html">postman</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../life/index.html">hello-生活</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">blog</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">hello-IT</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">java</a> &raquo;</li>
+        
+          <li><a href="../../index.html">java8</a> &raquo;</li>
+        
+          <li><a href="../index.html">stream流</a> &raquo;</li>
+        
+      <li>stream流原理浅析</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/it/java/java8/stream/1/stream流.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stream">
+<h1>stream流原理浅析<a class="headerlink" href="#stream" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">java8中提供了强大的stream流处理，通过其提供的例如过滤(filter)、映射(map)、截取(limit)、收集(collect)等一系列方法的组合，可以很好的解决对集合数据的复杂操作，仅以此篇对stream流水线式组合原理进行浅析，望知其然并知其所以然。</p>
+</div>
+<div class="section" id="id1">
+<h2>文档目录<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>对比小示例</li>
+<li>stream流的操作类型和惰性求值</li>
+<li>stream部分源代码浅析</li>
+<li>小结</li>
+<li>参考</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>对比小示例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>先举一个利用java8 中stream流方法与之前方法的一个简单示例：获取公司员工列表中年龄大于20的前三个员工的名字。</div></blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span></span>    <span class="c1">//定义Employee类</span>
+    <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">Integer</span> <span class="n">id</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Employee</span><span class="o">(</span><span class="n">Integer</span> <span class="n">id</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nf">Employee</span><span class="o">()</span> <span class="o">{</span>
+        <span class="o">}</span>
+
+        <span class="c1">//属性getter和setter方法......</span>
+    <span class="o">}</span>
+
+<span class="c1">//构造的员工数据列表</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">employees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Employee</span><span class="o">(</span><span class="mi">20180001</span><span class="o">,</span> <span class="s">&quot;Tom&quot;</span><span class="o">,</span>  <span class="mi">26</span><span class="o">));</span>
+<span class="n">employees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Employee</span><span class="o">(</span><span class="mi">20180002</span><span class="o">,</span> <span class="s">&quot;Lucy&quot;</span><span class="o">,</span>  <span class="mi">29</span><span class="o">));</span>
+<span class="n">employees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Employee</span><span class="o">(</span><span class="mi">20180003</span><span class="o">,</span> <span class="s">&quot;John&quot;</span><span class="o">,</span>  <span class="mi">23</span><span class="o">));</span>
+<span class="n">employees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Employee</span><span class="o">(</span><span class="mi">20180004</span><span class="o">,</span> <span class="s">&quot;Green&quot;</span><span class="o">,</span>  <span class="mi">27</span><span class="o">));</span>
+</pre></div>
+</div>
+<p>处理方式1: 传统集合处理方式</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="k">for</span><span class="o">(</span><span class="n">Employee</span> <span class="n">employee</span><span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">employee</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">names</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">employee</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="n">count</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+ <span class="o">}</span>
+</pre></div>
+</div>
+<p>处理方式2：stream流式处理：</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="n">Employee</span><span class="o">::</span><span class="n">getName</span><span class="o">).</span><span class="na">limit</span><span class="o">(</span><span class="mi">3</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">());</span>
+</pre></div>
+</div>
+<p>两种方式都能得出相同的结果即：</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="o">[</span><span class="s">&quot;Tom&quot;</span><span class="o">,</span> <span class="s">&quot;Lucy&quot;</span><span class="o">,</span> <span class="s">&quot;Green&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>上面示例可以看出，两种方式在获取满足要求的员工名字列表的判断逻辑相去不大，比较年龄-&gt;映射名字-&gt;判断数量；但stream函数式风格各个处理阶段分工明确，有条不絮，比如再加上名字不重复的前3个名字(按列表顺序)，stream中直接在limit()方法前挂一个distinct()即可，而集合处理方式的代码复杂度无疑大大增强。</p>
+</div>
+<div class="section" id="id3">
+<h2>stream流的操作类型和惰性求值<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>stream流的操作可粗分为两种：中间操作和终端操作。中间操作仅记录了操作，只有在终端操作时才会触发真正的计算过程；终端操作又可以分为短路与非短路操作，前者是指遇到某些符合条件的元素就可以得到最终结果；而后者是指必须处理所有元素才能得到最终结果。
+细分如下表[ <a class="reference external" href="http://www.cnblogs.com/CarpenterLee/p/6637118.html">引用传送门</a> ]：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="18%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="3">Stream操作分类</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2"><dl class="first last docutils">
+<dt>中间操作(Intermediate</dt>
+<dd>operations)</dd>
+</dl>
+</td>
+<td>无状态(Stateless)</td>
+<td>unordered filter map mapToInt mapToLong mapToDouble
+flatMap flatMapToInt flatMapToLong flatMapToDouble peek</td>
+</tr>
+<tr class="row-odd"><td>有状态(Stateful)</td>
+<td>distinct sorted limit skip</td>
+</tr>
+<tr class="row-even"><td rowspan="2"><dl class="first last docutils">
+<dt>结束操作(Intermediate</dt>
+<dd>operations)</dd>
+</dl>
+</td>
+<td>非短路操作</td>
+<td>forEach forEachOrdered toArray reduce collect max min count</td>
+</tr>
+<tr class="row-odd"><td>短路操作</td>
+<td>anyMatch allMatch noneMatch findFirst findAny</td>
+</tr>
+</tbody>
+</table>
+<p>示例2 惰性求值：</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">nameStream</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">)</span>
+                               <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">student</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                                       <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">student</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+                                       <span class="k">return</span> <span class="n">student</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+                               <span class="o">}).</span><span class="na">limit</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+               <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;--------------&quot;</span><span class="o">);</span>
+               <span class="n">nameStream</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">());</span>
+</pre></div>
+</div>
+<p>结果:</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="o">--------------</span>
+<span class="n">Tom</span>
+<span class="n">Lucy</span>
+<span class="n">Green</span>
+</pre></div>
+</div>
+<p>我这抛出两个小问题先：</p>
+<ul class="simple">
+<li>流处理过程数据是如何传递的？</li>
+<li>终端操作如何触发中间操作？</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>stream源代码浅析<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>以示例1的stream流水线进行跟踪分析，看看每个操作内部具体的实现。先简单有个这样的概念：</p>
+<ul class="simple">
+<li>流处理的每个操作叫做一个Stage；</li>
+<li>每个Stage可以理解成为是通过双向链表进行链接</li>
+</ul>
+<p>即：</p>
+<img alt="../../../../../_images/2018-03-10-001.jpg" src="../../../../../_images/2018-03-10-001.jpg" />
+<p>再放一张各操作的继承结构图：</p>
+<img alt="../../../../../_images/2018-03-10-002.jpg" src="../../../../../_images/2018-03-10-002.jpg" />
+<p><strong>stage0:</strong> 将eployees转换为流，实际上产生了一个Head，这个Head相当于双向链表的链头</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">//step1: 调用Collection的stream方法产生一个流</span>
+<span class="k">default</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">stream</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">StreamSupport</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">spliterator</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">//step2: 调用StreamSupport的stream方法</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">stream</span><span class="o">(</span><span class="n">Spliterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">spliterator</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">parallel</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">spliterator</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">ReferencePipeline</span><span class="o">.</span><span class="na">Head</span><span class="o">&lt;&gt;(</span><span class="n">spliterator</span><span class="o">,</span>
+                                        <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">fromCharacteristics</span><span class="o">(</span><span class="n">spliterator</span><span class="o">),</span>
+                                        <span class="n">parallel</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">//step3 创建Head，并通过supper初始化继承链上对应的AbstractPipeline相关属性</span>
+<span class="n">AbstractPipeline</span><span class="o">(</span><span class="n">Spliterator</span><span class="o">&lt;?&gt;</span> <span class="n">source</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sourceFlags</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">parallel</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//当前Stage置为null</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">previousStage</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="c1">//设置数据source</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sourceSpliterator</span> <span class="o">=</span> <span class="n">source</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sourceStage</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sourceOrOpFlags</span> <span class="o">=</span> <span class="n">sourceFlags</span> <span class="o">&amp;</span> <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">STREAM_MASK</span><span class="o">;</span>
+    <span class="c1">// The following is an optimization of:</span>
+    <span class="c1">// StreamOpFlag.combineOpFlags(sourceOrOpFlags, StreamOpFlag.INITIAL_OPS_VALUE);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">combinedFlags</span> <span class="o">=</span> <span class="o">(~(</span><span class="n">sourceOrOpFlags</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">))</span> <span class="o">&amp;</span> <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">INITIAL_OPS_VALUE</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">parallel</span> <span class="o">=</span> <span class="n">parallel</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Stage1:</strong> fliter()方法的相关定义，fliter()方法接收一个参数即函数式接口Predicate，通过该接口定义的test方法来测试flilter的自定义过滤条件。</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">&gt;</span> <span class="nf">filter</span><span class="o">(</span><span class="n">Predicate</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">P_OUT</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">predicate</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">StatelessOp</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">,</span> <span class="n">P_OUT</span><span class="o">&gt;(</span><span class="k">this</span><span class="o">,</span> <span class="n">StreamShape</span><span class="o">.</span><span class="na">REFERENCE</span><span class="o">,</span>
+                                 <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">NOT_SIZED</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="n">Sink</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">&gt;</span> <span class="nf">opWrapSink</span><span class="o">(</span><span class="kt">int</span> <span class="n">flags</span><span class="o">,</span> <span class="n">Sink</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">&gt;</span> <span class="n">sink</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">Sink</span><span class="o">.</span><span class="na">ChainedReference</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">,</span> <span class="n">P_OUT</span><span class="o">&gt;(</span><span class="n">sink</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">begin</span><span class="o">(</span><span class="kt">long</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">downstream</span><span class="o">.</span><span class="na">begin</span><span class="o">(-</span><span class="mi">1</span><span class="o">);</span>
+                <span class="o">}</span>
+
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">accept</span><span class="o">(</span><span class="n">P_OUT</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">u</span><span class="o">))</span>
+                        <span class="n">downstream</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">};</span>
+        <span class="o">}</span><span class="n">i</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>可以看到filter方法处理验证predicate的有效性外，就直接返回一个StatelessOp，StatelessOp里面重载了opWrapSink方法，该方法主要是通过终端操作时调用，先看看new的StatelessOp在干啥。</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">// 调用StatelessOp对应构造方法，除此之外，通过super将this</span>
+<span class="c1">//(即通过Stage0中的Head)作为当前Stage的upstream（前驱引用）</span>
+<span class="n">StatelessOp</span><span class="o">(</span><span class="n">AbstractPipeline</span><span class="o">&lt;?,</span> <span class="n">E_IN</span><span class="o">,</span> <span class="o">?&gt;</span> <span class="n">upstream</span><span class="o">,</span>
+                <span class="n">StreamShape</span> <span class="n">inputShape</span><span class="o">,</span>
+                <span class="kt">int</span> <span class="n">opFlags</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//调用super将数据传递给ReferencePipeline并继续调用super传递给AbstractPipeline进行数据项设置</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">upstream</span><span class="o">,</span> <span class="n">opFlags</span><span class="o">);</span>
+        <span class="k">assert</span> <span class="n">upstream</span><span class="o">.</span><span class="na">getOutputShape</span><span class="o">()</span> <span class="o">==</span> <span class="n">inputShape</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="n">AbstractPipeline</span><span class="o">(</span><span class="n">AbstractPipeline</span><span class="o">&lt;?,</span> <span class="n">E_IN</span><span class="o">,</span> <span class="o">?&gt;</span> <span class="n">previousStage</span><span class="o">,</span> <span class="kt">int</span> <span class="n">opFlags</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">previousStage</span><span class="o">.</span><span class="na">linkedOrConsumed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="c1">//设置前驱引用的后继引用指向当前Stage</span>
+    <span class="n">previousStage</span><span class="o">.</span><span class="na">nextStage</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">previousStage</span> <span class="o">=</span> <span class="n">previousStage</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sourceOrOpFlags</span> <span class="o">=</span> <span class="n">opFlags</span> <span class="o">&amp;</span> <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">OP_MASK</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">combinedFlags</span> <span class="o">=</span> <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">combineOpFlags</span><span class="o">(</span><span class="n">opFlags</span><span class="o">,</span> <span class="n">previousStage</span><span class="o">.</span><span class="na">combinedFlags</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sourceStage</span> <span class="o">=</span> <span class="n">previousStage</span><span class="o">.</span><span class="na">sourceStage</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">opIsStateful</span><span class="o">())</span>
+        <span class="n">sourceStage</span><span class="o">.</span><span class="na">sourceAnyStateful</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="c1">//设置方法链层次深度</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">depth</span> <span class="o">=</span> <span class="n">previousStage</span><span class="o">.</span><span class="na">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Stage2:</strong> map相关代码,和filter不同的是接收的参数是Function接口，最后传递给下游流是经过映射后的数据。</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Override</span>
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;unchecked&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">map</span><span class="o">(</span><span class="n">Function</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">P_OUT</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">R</span><span class="o">&gt;</span> <span class="n">mapper</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">mapper</span><span class="o">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">StatelessOp</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;(</span><span class="k">this</span><span class="o">,</span> <span class="n">StreamShape</span><span class="o">.</span><span class="na">REFERENCE</span><span class="o">,</span>
+                                 <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">NOT_SORTED</span> <span class="o">|</span> <span class="n">StreamOpFlag</span><span class="o">.</span><span class="na">NOT_DISTINCT</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="n">Sink</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">&gt;</span> <span class="nf">opWrapSink</span><span class="o">(</span><span class="kt">int</span> <span class="n">flags</span><span class="o">,</span> <span class="n">Sink</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span> <span class="n">sink</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">Sink</span><span class="o">.</span><span class="na">ChainedReference</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;(</span><span class="n">sink</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">//为map量身打造的accept操作</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">accept</span><span class="o">(</span><span class="n">P_OUT</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">downstream</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">u</span><span class="o">));</span>
+                <span class="o">}</span>
+            <span class="o">};</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Stage3:</strong> limit方法设置最大数据量截取条数</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="n">Stream</span><span class="o">&lt;</span><span class="n">P_OUT</span><span class="o">&gt;</span> <span class="nf">limit</span><span class="o">(</span><span class="kt">long</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">maxSize</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="n">Long</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">maxSize</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">SliceOps</span><span class="o">.</span><span class="na">makeRef</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">maxSize</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Stage4:</strong> collect</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&quot;unchecked&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">,</span> <span class="n">A</span><span class="o">&gt;</span> <span class="n">R</span> <span class="nf">collect</span><span class="o">(</span><span class="n">Collector</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">P_OUT</span><span class="o">,</span> <span class="n">A</span><span class="o">,</span> <span class="n">R</span><span class="o">&gt;</span> <span class="n">collector</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">A</span> <span class="n">container</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">isParallel</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">...)</span> <span class="o">{</span>
+        <span class="c1">//并行方式</span>
+        <span class="n">container</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="na">supplier</span><span class="o">().</span><span class="na">get</span><span class="o">();</span>
+        <span class="n">BiConsumer</span><span class="o">&lt;</span><span class="n">A</span><span class="o">,</span> <span class="o">?</span> <span class="kd">super</span> <span class="n">P_OUT</span><span class="o">&gt;</span> <span class="n">accumulator</span> <span class="o">=</span> <span class="n">collector</span><span class="o">.</span><span class="na">accumulator</span><span class="o">();</span>
+        <span class="n">forEach</span><span class="o">(</span><span class="n">u</span> <span class="o">-&gt;</span> <span class="n">accumulator</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">container</span><span class="o">,</span> <span class="n">u</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">//串行方式</span>
+        <span class="n">container</span> <span class="o">=</span> <span class="n">evaluate</span><span class="o">(</span><span class="n">ReduceOps</span><span class="o">.</span><span class="na">makeRef</span><span class="o">(</span><span class="n">collector</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">collector</span><span class="o">.</span><span class="na">characteristics</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">Collector</span><span class="o">.</span><span class="na">Characteristics</span><span class="o">.</span><span class="na">IDENTITY_FINISH</span><span class="o">)</span>
+           <span class="o">?</span> <span class="o">(</span><span class="n">R</span><span class="o">)</span> <span class="n">container</span>
+           <span class="o">:</span> <span class="n">collector</span><span class="o">.</span><span class="na">finisher</span><span class="o">().</span><span class="na">apply</span><span class="o">(</span><span class="n">container</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>collect的调用过程相对比较复杂，用流程图进行简要介绍(主要介绍串行方式)：</p>
+<img alt="../../../../../_images/2018-03-11-001.jpg" src="../../../../../_images/2018-03-11-001.jpg" />
+<p>在本文给出的示例中，各个中间操作的accept方法具体执行时间是在collect阶段来完成的，更具体的就是执行了action.accept(e)，这也正好印证了stream流的惰性计算过程。换句话说，这一流式计算过程也实际上就是调用各个Stage中的accept方法过程。</p>
+</div>
+<div class="section" id="id5">
+<h2>小结<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>本片博客介绍的内容也不过stream流中的冰山一角，可能其中有理解不准确的，下一篇准备研究一下串并行之间的工作原理的不同之处以及串并转换过程。</p>
+</div>
+<div class="section" id="id6">
+<h2>参考<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>[ <a class="reference external" href="http://www.cnblogs.com/CarpenterLee/p/6637118.html">深入理解Java Stream流水线</a> ]</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../../python/index.html" class="btn btn-neutral float-right" title="python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="stream流" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, boyka.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'1.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

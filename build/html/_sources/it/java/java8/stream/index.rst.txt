@@ -1,10 +1,9 @@
-﻿lambda表达式
+﻿stream流
 ============================
 
 
 .. toctree::
     :maxdepth: 1
 
-    lambda-1
-    lambda原理篇(译)
+    1/stream流
 

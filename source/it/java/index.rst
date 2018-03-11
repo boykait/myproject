@@ -4,6 +4,6 @@ java
 java;\
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     java8/index
