@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../../../../../search.html"/>
     <link rel="top" title="blog 1.0.1 documentation" href="../../../../../index.html"/>
         <link rel="up" title="stream流" href="../index.html"/>
-        <link rel="next" title="python" href="../../../../python/index.html"/>
+        <link rel="next" title="Java异步编程" href="../../异步编程/index.html"/>
         <link rel="prev" title="stream流" href="../index.html"/> 
 
   
@@ -98,6 +98,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../../index.html">java8</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../lambda/index.html">lambda表达式</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html">stream流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../异步编程/index.html">Java异步编程</a></li>
 </ul>
 </li>
 </ul>
@@ -295,7 +296,8 @@ flatMap flatMapToInt flatMapToLong flatMapToDouble peek</td>
 </tr>
 </tbody>
 </table>
-<p>示例2 惰性求值：</p>
+<p>惰性求值：惰性，懒惰也，啥意思？看个例子先：
+示例2 惰性求值：</p>
 <div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">nameStream</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">)</span>
                                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">student</span> <span class="o">-&gt;</span> <span class="o">{</span>
                                        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">student</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
@@ -312,6 +314,7 @@ flatMap flatMapToInt flatMapToLong flatMapToDouble peek</td>
 <span class="n">Green</span>
 </pre></div>
 </div>
+<p>粗看println方法好像是在那一排横线前面的，怎么打印到后面去了呢？例子中体现的就是中间操作(filter|map|limit)差不多起个定义作用，具体的计算调用操作是等到后面的终端操作进行的(collect)，等到实在需要结果的时候再计算。后面源码浅析部分会介绍。</p>
 <p>我这抛出两个小问题先：</p>
 <ul class="simple">
 <li>流处理过程数据是如何传递的？</li>
@@ -486,7 +489,7 @@ flatMap flatMapToInt flatMapToLong flatMapToDouble peek</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../../../python/index.html" class="btn btn-neutral float-right" title="python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../异步编程/index.html" class="btn btn-neutral float-right" title="Java异步编程" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index.html" class="btn btn-neutral" title="stream流" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
