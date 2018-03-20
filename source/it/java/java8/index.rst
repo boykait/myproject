@@ -8,5 +8,4 @@
 
     lambda/index
     stream/index
-    asynchronous_programming/index
  
